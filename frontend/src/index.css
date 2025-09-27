@@ -1,0 +1,92 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+html,
+body,
+#root {
+  margin: unset;
+  padding: unset;
+  height: 100%;
+}
+
+/* chat container */
+.str-chat__container {
+  /* min-height: calc(100dvh - 64px); */
+}
+.str-chat__container:has(.str-chat__thread-container.str-chat__thread) > div.main-chat {
+  display: none;
+}
+@media (width >= 48rem) {
+  /* .str-chat__container {
+    max-height: calc(100dvh - 104px);
+  } */
+  .str-chat__container:has(.str-chat__thread-container.str-chat__thread) > div.main-chat {
+    display: initial;
+  }
+}
+
+/* chats */
+.str-chat__channel-header {
+  padding: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(208, 208, 208);
+}
+.str-chat__message-input {
+  padding: 10px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(208, 208, 208);
+}
+.str-chat__list-notifications {
+  margin: 0
+}
+.str-chat__list {
+  -ms-overflow-style: none;  
+  scrollbar-width: none; 
+}
+
+/* call */
+ul.str-video__generic-menu {
+  background: white;
+
+  .str-video__generic-menu--item {
+    button {
+      background: white;
+
+      &:hover {
+        background: rgb(224, 224, 224);
+      }
+      
+      span {
+        background: black
+      }
+    }
+  }
+}
+
+.str-video__call-controls {
+
+  .str-video__notification {
+    background: rgb(220, 220, 220);
+  }
+}
+@media (width < 48rem) {
+  /* call spotlight */
+  .str-video__speaker-layout__spotlight {
+    width: calc(100vw - 80px);
+  }
+  
+  /* participants bar */
+  .str-video__speaker-layout__participants-bar-wrapper {
+    max-width: calc(100vw - 80px);
+  }
+}

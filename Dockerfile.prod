@@ -1,0 +1,40 @@
+# ===== Frontend Build =====
+FROM node:22-alpine AS frontend-build
+
+WORKDIR /app/frontend
+
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend ./
+RUN npm run build
+
+
+# ===== Backend Build =====
+FROM node:22-alpine AS backend-build
+
+WORKDIR /app/backend
+
+COPY backend/package*.json ./
+RUN npm ci
+COPY backend ./
+RUN npm run build
+
+
+# ===== Final Production Image =====
+FROM node:22-alpine AS app-prod
+
+WORKDIR /app/backend
+
+# copy frontend-build
+COPY --from=frontend-build /app/frontend/dist /app/frontend/dist
+COPY frontend/package*.json ./
+
+# copy backend-build
+COPY --from=backend-build /app/backend/dist ./dist
+COPY backend/package*.json ./
+
+ENV NODE_ENV=production
+RUN npm ci --omit=dev
+
+EXPOSE 9000
+CMD ["npm", "run", "start:docker"]

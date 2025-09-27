@@ -1,0 +1,20 @@
+{
+  "name": "linkup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "app:install": "npm install --prefix frontend && npm install --prefix backend",
+    "app:build": "npm run build --prefix frontend && npm run build --prefix backend",
+    "build": "npm run app:install && npm run app:build",
+    "start": "NODE_ENV=production npm run start:docker --prefix backend",
+    "start-win": "set NODE_ENV=production && npm run start:docker --prefix backend",
+    "docker-dev:up": "docker compose -f docker-compose-dev.yaml up",
+    "docker-dev:down": "docker compose -f docker-compose-dev.yaml down --volumes",
+    "docker-prod:up": "docker compose -f docker-compose-prod.yaml up --build -d",
+    "docker-prod:down": "docker compose -f docker-compose-prod.yaml down"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

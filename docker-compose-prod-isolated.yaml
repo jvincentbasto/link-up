@@ -1,0 +1,17 @@
+name: linkup
+services:
+  web:
+    extends:
+      service: web
+      file: ./frontend/docker-compose-prod.yaml
+    depends_on:
+      - api
+    image: linkup-web
+    container_name: linkup-web
+
+  api:
+    extends:
+      service: api
+      file: ./backend/docker-compose-prod.yaml
+    image: linkup-api
+    container_name: linkup-api

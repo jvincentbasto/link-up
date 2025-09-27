@@ -1,0 +1,21 @@
+name: linkup-frontend-dev
+services:
+  web:
+    image: linkup-frontend-dev
+    container_name: linkup-frontend-dev-web
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+      # args:
+      #   CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING}
+    ports:
+      # - "5173:5173"
+      - "3000:3000"
+    env_file:
+    - .env.local
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      # - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}

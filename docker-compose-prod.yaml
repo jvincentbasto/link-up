@@ -1,0 +1,19 @@
+name: linkup
+services:
+  app:
+    image: linkup-app
+    container_name: linkup-app
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - 9000:9000
+    env_file:
+      - ./frontend/.env
+      - ./backend/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/api"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

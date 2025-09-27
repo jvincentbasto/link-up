@@ -1,0 +1,13 @@
+name: linkup-frontend
+services:
+  web:
+    image: linkup-frontend
+    container_name: linkup-frontend-web
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      # - "4173:4173"
+      - "4000:4000"
+    env_file:
+    - .env
